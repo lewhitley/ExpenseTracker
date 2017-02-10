@@ -4,7 +4,8 @@ class Api::ExpensesController < ApplicationController
   def create
     @expense = Expense.new(expense_params)
     if @expense.save
-      render :show
+      @expenses = Expense.find_by_user_id(current_user.id)
+      render :index
     else
       render json: @expense.errors.full_messages, status: 422
     end
@@ -20,16 +21,25 @@ class Api::ExpensesController < ApplicationController
         render json: @expense.errors.full_messages, status: 422
       end
     else
-      render json: ["You are not the owner of the expense"], status: 404
+      render json: ["You are not the owner of the expense."], status: 404
     end
   end
 
   def index
-    #need more
-    if (current_user.id == @expenses.user_id) || (current_user.admin)
+    if !params[:user_id]
+      if params[:report] && params[:filter]
+        @expenses = Expense.filter_by(params[:report], params[:filter])
+      elsif params[:report]
+        @expenses = Expense.report(params[:report])
+      else
+        @expenses = Expense.find_by_user_id(current_user.id)
+      end
+      render :index
+    elsif current_user.admin && params[:user_id]
+      @expenses = Expense.find_by_user_id(params[:user_id])
       render :index
     else
-      render json: ["You are not the owner of the expense"], status: 404
+      render json: ["You are not the owner of the expenses."], status: 404
     end
   end
 
@@ -38,7 +48,7 @@ class Api::ExpensesController < ApplicationController
     if (current_user.id == @expense.user_id) || (current_user.admin)
       render :show
     else
-      render json: ["You are not the owner of the expense"], status: 404
+      render json: ["You are not the owner of the expense."], status: 404
     end
   end
 
@@ -46,9 +56,10 @@ class Api::ExpensesController < ApplicationController
     @expense = Expense.find(params[:id])
     if current_user.id == @expense.user_id
       @expense.destroy
+      @expenses = Expense.find_by_user_id(current_user.id)
       render :index
     else
-      render json: ["You are not the owner of the expense"], status: 404
+      render json: ["You are not the owner of the expense."], status: 404
     end
   end
 
