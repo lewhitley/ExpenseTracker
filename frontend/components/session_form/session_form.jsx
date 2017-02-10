@@ -6,7 +6,8 @@ class SessionForm extends React.Component {
     super(props);
     this.state = {
       username: "",
-      password: ""
+      password: "",
+      admin: null
     };
     this.header = this.header.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -29,6 +30,12 @@ class SessionForm extends React.Component {
     });
   }
 
+  setAdmin(e) {
+    this.setState({
+      admin: e.target.value
+    });
+  }
+
   handleErrors() {
     if (this.errors){
       return (
@@ -42,7 +49,7 @@ class SessionForm extends React.Component {
   header() {
     return (
       <header>
-        Welcome to ExpenseTracker! Please {this.props.formType } below.
+        Welcome to ExpenseTracker! Please { this.props.formType } below.
         <br />
         Otherwise, { this.linked() }
       </header>
@@ -63,6 +70,26 @@ class SessionForm extends React.Component {
     this.props.processForm(user);
   }
 
+  signupOnly() {
+    if (this.props.formType === "signup") {
+      return (
+        <div onChange={this.setAdmin.bind(this)}>
+          Admin User?
+          <br />
+          <label>
+            <input type="radio" value="true" name="admin"/>
+            Yes
+          </label>
+          <br />
+          <label>
+            <input type="radio" value="false" name="admin"/>
+            No
+          </label>
+        </div>
+      );
+    }
+  }
+
   render() {
     return (
       <div>
@@ -79,6 +106,7 @@ class SessionForm extends React.Component {
             placeholder='Password'
             onChange={this.update("password")}></input>
           <br />
+          { this.signupOnly() }
           <button onClick={this.handleSubmit}>Submit</button>
         </form>
       </div>
