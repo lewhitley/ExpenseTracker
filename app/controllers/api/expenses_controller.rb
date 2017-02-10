@@ -32,7 +32,7 @@ class Api::ExpensesController < ApplicationController
       elsif params[:report]
         @expenses = Expense.report(params[:report])
       else
-        @expenses = Expense.find_by_user_id(current_user.id)
+        @expenses = Expense.where(user_id: current_user.id)
       end
       render :index
     elsif current_user.admin && params[:user_id]
