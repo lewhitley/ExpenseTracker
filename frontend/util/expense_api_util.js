@@ -36,12 +36,12 @@ export const fetchExpenses = (success) => {
   });
 };
 
-export const adminFetchExpenses = (userId, success) => {
+export const adminFetchExpenses = success => {
   $.ajax({
     datatype: 'json',
     url: `/api/expenses`,
     type: 'GET',
-    data: {user_id: userId},
+    data: {admin: true},
     success
   });
 };

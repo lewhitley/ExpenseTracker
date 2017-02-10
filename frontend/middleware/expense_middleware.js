@@ -1,5 +1,6 @@
-import { receiveExpenses, CREATE_EXPENSE, UPDATE_EXPENSE,
-  DELETE_EXPENSE, FETCH_EXPENSES, FETCH_ADMIN_EXPENSES } from '../actions/expense_actions';
+import { receiveExpenses, receiveAdminExpenses, CREATE_EXPENSE,
+  UPDATE_EXPENSE, DELETE_EXPENSE, FETCH_EXPENSES,
+  FETCH_ADMIN_EXPENSES } from '../actions/expense_actions';
 import { createExpense, updateExpense, deleteExpense, fetchExpenses,
   adminFetchExpenses } from '../util/expense_api_util';
 
@@ -20,7 +21,7 @@ export default ({getState, dispatch}) => next => action => {
       fetchExpenses(successCallback);
       return next(action);
     case FETCH_ADMIN_EXPENSES:
-      adminFetchExpenses(action.userId, successCallback);
+      adminFetchExpenses(expenses => dispatch(receiveAdminExpenses(expenses)));
       return next(action);
     default:
       return next(action);

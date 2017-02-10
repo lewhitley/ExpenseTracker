@@ -7,14 +7,19 @@ import SessionFormContainer from './session_form/session_form_container';
 // import ReportsContainer from './reports/reports_container';
 import ExpensesContainer from './expenses/expenses_container';
 import ExpenseFormContainer from './expense_form/expense_form_container';
+import ExpenseAdminContainer from './expense_admin/expense_admin_container';
 
-import { fetchExpenses } from '../actions/expense_actions';
+import { fetchExpenses, fetchAdminExpenses } from '../actions/expense_actions';
 
 const Root = ({ store }) => {
   const fetchExpensesOnEnter = () => {
     if (!store.expenses) {
       store.dispatch(fetchExpenses());
     }
+  };
+
+  const fetchAdminExpensesOnEnter = () => {
+    store.dispatch(fetchAdminExpenses());
   };
 
   return (
@@ -28,6 +33,8 @@ const Root = ({ store }) => {
           <Route path="/expenses/:expenseId" component={ExpenseFormContainer}
             onEnter={fetchExpensesOnEnter} />
           <Route path="/new-expense" component={ExpenseFormContainer} />
+          <Route path="/admin-expenses" component={ExpenseAdminContainer}
+            onEnter={fetchAdminExpensesOnEnter} />
         </Route>
       </Router>
     </Provider>

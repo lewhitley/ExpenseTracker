@@ -26,7 +26,7 @@ class Api::ExpensesController < ApplicationController
   end
 
   def index
-    if !params[:user_id]
+    if !params[:admin]
       if params[:report] && params[:filter]
         @expenses = Expense.filter_by(params[:report], params[:filter])
       elsif params[:report]
@@ -35,8 +35,8 @@ class Api::ExpensesController < ApplicationController
         @expenses = current_user.expenses
       end
       render :index
-    elsif current_user.admin && params[:user_id]
-      @expenses = User.find(params[:user_id]).expenses
+    elsif current_user.admin && params[:admin]
+      @expenses = Expense.all
       render :index
     else
       render json: ["You are not the owner of the expenses."], status: 404
