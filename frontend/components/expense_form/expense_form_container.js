@@ -3,10 +3,14 @@ import { createExpense, updateExpense, deleteExpense } from '../../actions/expen
 import ExpenseForm from './expense_form';
 
 const mapStateToProps = ( {expenses}, ownProps ) => {
-  return {expense: expenses[ownProps.routeParams.expenseId]};
+  if (ownProps.routeParams.expenseId) {
+    return {expense: expenses[ownProps.routeParams.expenseId]};
+  } else {
+    return {formType: "new"};
+  }
 };
 
-const mapDispatchToProps = ( dispatch, { location } ) => ({
+const mapDispatchToProps = ( dispatch ) => ({
   createExpense: expense => dispatch(createExpense(expense)),
   updateExpense: expense => dispatch(updateExpense(expense)),
   deleteExpense: id => dispatch(deleteExpense(id))

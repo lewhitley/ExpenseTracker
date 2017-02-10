@@ -27,6 +27,7 @@ const Root = ({ store }) => {
           onEnter={fetchExpensesOnEnter} />
         <Route path="/expenses/:expenseId" component={ExpenseFormContainer}
           onEnter={fetchExpensesOnEnter} />
+        <Route path="/new-expense" component={ExpenseFormContainer} />
       </Router>
     </Provider>
   );

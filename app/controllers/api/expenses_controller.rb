@@ -15,7 +15,7 @@ class Api::ExpensesController < ApplicationController
     @expense = Expense.find(params[:id])
     if current_user.id == @expense.user_id
       if @expense.update(expense_params)
-        @expenses = Expense.find_by_user_id(current_user.id)
+        @expenses = Expense.where(user_id: current_user.id)
         render :index
       else
         render json: @expense.errors.full_messages, status: 422
