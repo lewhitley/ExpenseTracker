@@ -8,6 +8,7 @@ class ExpenseForm extends React.Component {
     this.state = {
       amount: props.expense ? props.expense.amount : "",
       description: props.expense ? props.expense.description : "",
+      user_id: props.currentUser.id,
       id: props.expense ? props.expense.id : null
     };
 
