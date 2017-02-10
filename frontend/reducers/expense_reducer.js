@@ -1,6 +1,6 @@
 import { RECEIVE_EXPENSES } from '../actions/expense_actions';
 
-export default (state = [], action) =>{
+export default (state = {}, action) =>{
   Object.freeze(state);
 
   switch(action.type) {
