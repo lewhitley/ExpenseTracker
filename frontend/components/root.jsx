@@ -12,7 +12,9 @@ import { fetchExpenses } from '../actions/expense_actions';
 
 const Root = ({ store }) => {
   const fetchExpensesOnEnter = () => {
-    store.dispatch(fetchExpenses());
+    if (!store.expenses) {
+      store.dispatch(fetchExpenses());
+    }
   };
 
   return (
@@ -22,8 +24,9 @@ const Root = ({ store }) => {
         <Route path="/login" component={SessionFormContainer} />
         <Route path="/signup" component={SessionFormContainer} />
         <Route path="/expenses" component={ExpensesContainer}
-          onEnter={fetchExpensesOnEnter}/>
-        <Route path="/expenses/:expenseId" component={ExpenseFormContainer} />
+          onEnter={fetchExpensesOnEnter} />
+        <Route path="/expenses/:expenseId" component={ExpenseFormContainer}
+          onEnter={fetchExpensesOnEnter} />
       </Router>
     </Provider>
   );
