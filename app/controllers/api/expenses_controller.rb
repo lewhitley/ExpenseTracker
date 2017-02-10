@@ -27,10 +27,8 @@ class Api::ExpensesController < ApplicationController
 
   def index
     if !params[:admin]
-      if params[:report] && params[:filter]
-        @expenses = Expense.filter_by(params[:report], params[:filter])
-      elsif params[:report]
-        @expenses = Expense.report(params[:report])
+      if params[:filter]
+        @expenses = Expense.filter_by(params[:filter])
       else
         @expenses = current_user.expenses
       end

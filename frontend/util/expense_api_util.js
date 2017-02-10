@@ -27,7 +27,7 @@ export const deleteExpense = (id, success) => {
   });
 };
 
-export const fetchExpenses = (success) => {
+export const fetchExpenses = success => {
   $.ajax({
     datatype: 'json',
     url: `/api/expenses`,

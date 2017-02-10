@@ -6,6 +6,7 @@ import App from './app';
 import SessionFormContainer from './session_form/session_form_container';
 // import ReportsContainer from './reports/reports_container';
 import ExpensesContainer from './expenses/expenses_container';
+import ReportContainer from './report/report_container';
 import ExpenseFormContainer from './expense_form/expense_form_container';
 import ExpenseAdminContainer from './expense_admin/expense_admin_container';
 
@@ -38,6 +39,8 @@ const Root = ({ store }) => {
         <Route path="/" component={App} >
           <Route path="/expenses" component={ExpensesContainer}
             onEnter={fetchExpensesOnEnter} />
+          <Route path="/reports" component={ReportContainer}
+            onEnter={_redirectIfLoggedOut} />
           <Route path="/expenses/:expenseId" component={ExpenseFormContainer}
             onEnter={fetchExpensesOnEnter} />
           <Route path="/new-expense" component={ExpenseFormContainer}

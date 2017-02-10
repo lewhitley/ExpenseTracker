@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import {  } from '../../actions/reports_actions';
-import Reports from './reports';
+import {  } from '../../actions/report_actions';
+import Report from './report';
 
 const mapStateToProps = (state) => ({
 
@@ -13,4 +13,4 @@ const mapDispatchToProps = ( dispatch, { location } ) => {
 export default connect (
   mapStateToProps,
   mapDispatchToProps
-) (Reports);
+) (Report);
