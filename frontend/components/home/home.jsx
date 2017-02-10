@@ -9,11 +9,18 @@ const sessionLinks = () => (
   </nav>
 );
 
+const adminExpenses = currentUser => {
+  if (currentUser.admin) {
+    return <Link to="/admin-expenses" activeClassName="current">Admin Expenses</Link>;
+  }
+};
+
 const personalGreeting = (currentUser, logout) => (
 	<header>
     <span className="header-name">Hi, {currentUser.username}!</span>
     <Link to="/reports" activeClassName="current">Reports</Link>
-    <Link to="/expenses" activeClassName="current">Expenses</Link>
+    <Link to="/expenses" activeClassName="current">My Expenses</Link>
+    { adminExpenses(currentUser) }
     <button className="header-button" onClick={logout}>Log Out</button>
 	</header>
 );
