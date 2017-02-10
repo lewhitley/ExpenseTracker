@@ -1,5 +1,5 @@
 class Api::ExpensesController < ApplicationController
-  before_action :logged_in?
+  before_action :require_login
 
   def create
     @expense = Expense.new(expense_params)
@@ -20,7 +20,7 @@ class Api::ExpensesController < ApplicationController
         render json: @expense.errors.full_messages, status: 422
       end
     else
-      render json: ["No user currently logged in or not the owner of the expense"], status: 404
+      render json: ["You are not the owner of the expense"], status: 404
     end
   end
 
@@ -29,7 +29,7 @@ class Api::ExpensesController < ApplicationController
     if (current_user.id == @expenses.user_id) || (current_user.admin)
       render :index
     else
-      render json: ["No user currently logged in or not the owner of the expense"], status: 404
+      render json: ["You are not the owner of the expense"], status: 404
     end
   end
 
@@ -38,7 +38,7 @@ class Api::ExpensesController < ApplicationController
     if (current_user.id == @expense.user_id) || (current_user.admin)
       render :show
     else
-      render json: ["No user currently logged in or not the owner of the expense"], status: 404
+      render json: ["You are not the owner of the expense"], status: 404
     end
   end
 
@@ -48,7 +48,7 @@ class Api::ExpensesController < ApplicationController
       @expense.destroy
       render :index
     else
-      render json: ["No user currently logged in or not the owner of the expense"], status: 404
+      render json: ["You are not the owner of the expense"], status: 404
     end
   end
 
