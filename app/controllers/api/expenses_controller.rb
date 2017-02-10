@@ -56,7 +56,7 @@ class Api::ExpensesController < ApplicationController
     @expense = Expense.find(params[:id])
     if current_user.id == @expense.user_id
       @expense.destroy
-      @expenses = Expense.find_by_user_id(current_user.id)
+      @expenses = current_user.expenses
       render :index
     else
       render json: ["You are not the owner of the expense."], status: 404
