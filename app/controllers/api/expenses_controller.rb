@@ -4,7 +4,7 @@ class Api::ExpensesController < ApplicationController
   def create
     @expense = Expense.new(expense_params)
     if @expense.save
-      @expenses = Expense.find_by_user_id(current_user.id)
+      @expenses = current_user.expenses
       render :index
     else
       render json: @expense.errors.full_messages, status: 422
@@ -15,7 +15,7 @@ class Api::ExpensesController < ApplicationController
     @expense = Expense.find(params[:id])
     if current_user.id == @expense.user_id
       if @expense.update(expense_params)
-        @expenses = Expense.where(user_id: current_user.id)
+        @expenses = current_user.expenses
         render :index
       else
         render json: @expense.errors.full_messages, status: 422
@@ -36,7 +36,7 @@ class Api::ExpensesController < ApplicationController
       end
       render :index
     elsif current_user.admin && params[:user_id]
-      @expenses = Expense.find_by_user_id(params[:user_id])
+      @expenses = User.find(params[:user_id]).expenses
       render :index
     else
       render json: ["You are not the owner of the expenses."], status: 404
