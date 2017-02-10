@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
-  helper_method :current_user, :require_login
+  helper_method :current_user, :require_login, :logged_in?
 
   def current_user
     @current_user ||= User.find_by(session_token: session[:session_token])
@@ -19,9 +19,7 @@ class ApplicationController < ActionController::Base
   end
 
   def require_login
-    unless logged_in?
-      render json: ["No user currently logged in"], status: 404
-    end
+    render json: ["No user currently logged in"], status: 404 unless logged_in?
   end
 
   def logged_in?
