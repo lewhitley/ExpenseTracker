@@ -10,14 +10,18 @@ const sessionLinks = () => (
 );
 
 const personalGreeting = (currentUser, logout) => (
-	<hgroup className="header-group">
-    <h2 className="header-name">Hi, {currentUser.username}!</h2>
+	<header>
+    <span className="header-name">Hi, {currentUser.username}!</span>
+    <Link to="/reports" activeClassName="current">Reports</Link>
+    <Link to="/expenses" activeClassName="current">Expenses</Link>
     <button className="header-button" onClick={logout}>Log Out</button>
-	</hgroup>
+	</header>
 );
 
-const Greeting = ({ currentUser, logout }) => (
+
+
+const Home = ({ currentUser, logout }) => (
   currentUser ? personalGreeting(currentUser, logout) : sessionLinks()
 );
 
-export default Greeting;
+export default Home;
