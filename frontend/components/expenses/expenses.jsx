@@ -9,16 +9,19 @@ class Expenses extends React.Component {
 
   render() {
     return (
-      <ul className='expense-index'>
-        {expenseArray(this.props.expenses).map( (expense, idx) => (
-          <Link to={'/expenses/'+expense.id} key={idx}>
-          <li className='expense-item'>
-            { expense.amount }
-            { expense.description }
-          </li>
-          </Link>
-        ))}
-      </ul>
+      <section>
+        <ul className='expense-index'>
+          {expenseArray(this.props.expenses).map( (expense, idx) => (
+            <Link to={'/expenses/'+expense.id} key={idx}>
+              <li className='expense-item'>
+                { expense.amount }
+                { expense.description }
+              </li>
+            </Link>
+          ))}
+        </ul>
+        <Link to={'/new-expense'}>Add Expense</Link>
+      </section>
     );
   }
 }
