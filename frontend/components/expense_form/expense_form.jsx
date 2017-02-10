@@ -33,6 +33,7 @@ class ExpenseForm extends React.Component {
 
   delete() {
     this.props.deleteExpense(this.props.expense.id);
+    this.props.redirectToExpenses();
   }
 
   deleteButton() {
@@ -49,6 +50,7 @@ class ExpenseForm extends React.Component {
     } else {
       this.props.updateExpense(this.state);
     }
+    this.props.redirectToExpenses();
   }
 
   loaded() {

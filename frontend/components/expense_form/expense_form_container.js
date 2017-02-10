@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { hashHistory } from 'react-router';
 import { createExpense, updateExpense, deleteExpense } from '../../actions/expense_actions';
 import ExpenseForm from './expense_form';
 
@@ -13,10 +14,13 @@ const mapStateToProps = ( state, ownProps ) => {
   }
 };
 
-const mapDispatchToProps = ( dispatch ) => ({
+const mapDispatchToProps = ( dispatch, ownProps ) => ({
   createExpense: expense => dispatch(createExpense(expense)),
   updateExpense: expense => dispatch(updateExpense(expense)),
-  deleteExpense: id => dispatch(deleteExpense(id))
+  deleteExpense: id => dispatch(deleteExpense(id)),
+  redirectToExpenses: () => {
+    hashHistory.replace("/expenses");
+  }
 });
 
 export default connect (
