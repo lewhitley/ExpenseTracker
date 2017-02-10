@@ -20,14 +20,15 @@ const Root = ({ store }) => {
   return (
     <Provider store={store}>
       <Router history={hashHistory}>
-        <Route path="/" component={App} />
-        <Route path="/login" component={SessionFormContainer} />
-        <Route path="/signup" component={SessionFormContainer} />
-        <Route path="/expenses" component={ExpensesContainer}
-          onEnter={fetchExpensesOnEnter} />
-        <Route path="/expenses/:expenseId" component={ExpenseFormContainer}
-          onEnter={fetchExpensesOnEnter} />
-        <Route path="/new-expense" component={ExpenseFormContainer} />
+        <Route path="/" component={App} >
+          <Route path="/login" component={SessionFormContainer} />
+          <Route path="/signup" component={SessionFormContainer} />
+          <Route path="/expenses" component={ExpensesContainer}
+            onEnter={fetchExpensesOnEnter} />
+          <Route path="/expenses/:expenseId" component={ExpenseFormContainer}
+            onEnter={fetchExpensesOnEnter} />
+          <Route path="/new-expense" component={ExpenseFormContainer} />
+        </Route>
       </Router>
     </Provider>
   );
