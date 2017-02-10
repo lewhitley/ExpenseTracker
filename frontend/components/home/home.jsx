@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
+import { hashHistory } from 'react-router';
 
 const sessionLinks = () => (
   <nav className="login-signup">
@@ -15,13 +16,20 @@ const adminExpenses = currentUser => {
   }
 };
 
+const logoutRedirect = (logout) => {
+  return () => {
+    logout();
+    hashHistory.replace("/");
+  };
+};
+
 const personalGreeting = (currentUser, logout) => (
 	<header>
     <span className="header-name">Hi, {currentUser.username}!</span>
     <Link to="/reports" activeClassName="current">Reports</Link>
     <Link to="/expenses" activeClassName="current">My Expenses</Link>
     { adminExpenses(currentUser) }
-    <button className="header-button" onClick={logout}>Log Out</button>
+    <button className="header-button" onClick={logoutRedirect(logout)}>Log Out</button>
 	</header>
 );
 

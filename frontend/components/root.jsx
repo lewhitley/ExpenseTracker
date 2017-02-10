@@ -13,26 +13,35 @@ import { fetchExpenses, fetchAdminExpenses } from '../actions/expense_actions';
 
 const Root = ({ store }) => {
   const fetchExpensesOnEnter = () => {
+    _redirectIfLoggedOut();
     if (!store.expenses) {
       store.dispatch(fetchExpenses());
     }
   };
 
   const fetchAdminExpensesOnEnter = () => {
+    _redirectIfLoggedOut();
     store.dispatch(fetchAdminExpenses());
+  };
+
+  const _redirectIfLoggedOut = () => {
+    if (!store.getState().session.currentUser) {
+      hashHistory.replace("/");
+    }
   };
 
   return (
     <Provider store={store}>
       <Router history={hashHistory}>
+        <Route path="/login" component={SessionFormContainer} />
+        <Route path="/signup" component={SessionFormContainer} />
         <Route path="/" component={App} >
-          <Route path="/login" component={SessionFormContainer} />
-          <Route path="/signup" component={SessionFormContainer} />
           <Route path="/expenses" component={ExpensesContainer}
             onEnter={fetchExpensesOnEnter} />
           <Route path="/expenses/:expenseId" component={ExpenseFormContainer}
             onEnter={fetchExpensesOnEnter} />
-          <Route path="/new-expense" component={ExpenseFormContainer} />
+          <Route path="/new-expense" component={ExpenseFormContainer}
+            onEnter={_redirectIfLoggedOut} />
           <Route path="/admin-expenses" component={ExpenseAdminContainer}
             onEnter={fetchAdminExpensesOnEnter} />
         </Route>

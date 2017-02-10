@@ -12,7 +12,7 @@ class ExpenseAdmin extends React.Component {
         All Expenses
         <ul>
           {expenseArray(this.props.expenses).map( (expense, idx) => (
-          <li className='expense-item'>
+          <li className='expense-item' key={idx}>
             { expense.amount }
             { expense.description }
           </li>

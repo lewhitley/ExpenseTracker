@@ -9,7 +9,7 @@ class SessionForm extends React.Component {
       password: "",
       admin: null
     };
-    this.header = this.header.bind(this);
+    this.greeting = this.greeting.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleErrors = this.handleErrors.bind(this);
   }
@@ -46,13 +46,13 @@ class SessionForm extends React.Component {
     }
   }
 
-  header() {
+  greeting() {
     return (
-      <header>
+      <div>
         Welcome to ExpenseTracker! Please { this.props.formType } below.
         <br />
         Otherwise, { this.linked() }
-      </header>
+      </div>
     );
   }
 
@@ -93,7 +93,7 @@ class SessionForm extends React.Component {
   render() {
     return (
       <div>
-        { this.header() }
+        { this.greeting() }
         <form>
           <div>
             { this.handleErrors() }
