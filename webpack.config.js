@@ -5,18 +5,16 @@ module.exports = {
   entry: "./frontend/expense_tracker.jsx",
   output: {
     path: path.join(__dirname, 'app', 'assets', 'javascripts'),
-    filename: "bundle.js",
-    devtoolModuleFilenameTemplate: '[resourcePath]',
-    devtoolFallbackModuleFilenameTemplate: '[resourcePath]?[hash]'
+    filename: "bundle.js"
   },
   module: {
     loaders: [
       {
         test: [/\.jsx?$/, /\.js?$/],
-        exclude: /node_modules/,
+        exclude: /(node_modules|bower_components)/,
         loader: 'babel',
         query: {
-          presets: ["es2015","react"]
+          presets: ['es2015', 'react']
         }
       }
     ]
