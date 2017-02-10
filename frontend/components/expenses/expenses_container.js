@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
-import { receiveExpenses } from '../../actions/expenses_actions';
+import { receiveExpenses } from '../../actions/expense_actions';
 import Expenses from './expenses';
 
-const mapStateToProps = (state) => ({
-  
+const mapStateToProps = ( {expenses} ) => ({
+  expenses: expenses
 });
 
 const mapDispatchToProps = ( dispatch, { location } ) => ({
