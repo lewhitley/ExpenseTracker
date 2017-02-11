@@ -71,7 +71,6 @@ RSpec.describe Api::ExpensesController, :type => :controller do
       end
 
       it "deletes only the given expense" do
-        # debugger
         expect(json.any? {|id, obj| obj["amount"] == 70.0}).to be true
         delete :destroy, format: :json, id: Expense.last.id
         expect(Expense.last.amount != 70.0).to be true

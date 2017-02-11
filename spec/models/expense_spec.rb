@@ -8,7 +8,7 @@ rescue
 end
 
 RSpec.describe Expense, :type => :model do
-  subject(:user) { User.create!(username: "jack_bruce", password: "abcdef") }
+  subject(:user) { User.create!(username: "karen_bruce", password: "abcdef") }
 
   it "is valid with valid attributes" do
     expense = Expense.new(user_id: user.id, amount: 30, description: "hello world")
