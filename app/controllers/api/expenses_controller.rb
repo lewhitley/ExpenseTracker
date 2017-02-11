@@ -28,7 +28,7 @@ class Api::ExpensesController < ApplicationController
   def index
     if !params[:admin]
       if params[:filter]
-        @expenses = Expense.filter_by(current_user, params[:filter])
+        @expenses = Expense.report(current_user, params[:filter])
         @start_date = params[:filter][:startDate].to_date
         @end_date = params[:filter][:endDate].to_date
         render :report

@@ -20,7 +20,4 @@ bundle exec rspec spec/controllers/application_controller_spec.rb
 bundle exec rspec spec/controllers/users_controller_spec.rb
 bundle exec rspec spec/controllers/sessions_controller_spec.rb
 bundle exec rspec spec/controllers/expenses_controller_spec.rb
-bundle exec rspec spec/features/auth_spec.rb
-bundle exec rspec spec/features/expenses_spec.rb
-bundle exec rspec spec/features/report_spec.rb
 ```
