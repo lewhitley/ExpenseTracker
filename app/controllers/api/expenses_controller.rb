@@ -44,15 +44,6 @@ class Api::ExpensesController < ApplicationController
     end
   end
 
-  def show
-    @expense = Expense.find(params[:id])
-    if (current_user.id == @expense.user_id) || (current_user.admin)
-      render :show
-    else
-      render json: ["You are not the owner of the expense."], status: 404
-    end
-  end
-
   def destroy
     @expense = Expense.find(params[:id])
     if current_user.id == @expense.user_id
