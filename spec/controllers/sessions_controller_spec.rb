@@ -10,10 +10,10 @@ RSpec.describe Api::SessionsController, :type => :controller do
   render_views
 
   let(:json) { JSON.parse(response.body) }
-  let(:user) { User.create({username: "jack_bruce", password: "abcdef"}) }
 
   before(:each) do
     allow_message_expectations_on_nil
+    User.create!({username: "jack_bruce", password: "abcdef"})
   end
 
   context "with invalid credentials" do
@@ -33,8 +33,8 @@ RSpec.describe Api::SessionsController, :type => :controller do
   context "with valid credentials" do
     it "gives user data on success" do
       post :create, format: :json, user: {username: "jack_bruce", password: "abcdef"}
-      expect(json.username).to eq("jack_bruce")
-      expect(json.admin).to be false
+      expect(json["username"]).to eq("jack_bruce")
+      expect(json["admin"]).to be false
     end
   end
 end
