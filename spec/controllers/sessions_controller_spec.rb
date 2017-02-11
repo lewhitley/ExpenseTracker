@@ -13,7 +13,7 @@ RSpec.describe Api::SessionsController, :type => :controller do
 
   before(:each) do
     allow_message_expectations_on_nil
-    User.create!({username: "jack_bruce", password: "abcdef"})
+    User.create({username: "jack_bruce", password: "abcdef"})
   end
 
   context "with invalid credentials" do

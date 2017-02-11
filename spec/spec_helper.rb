@@ -95,7 +95,7 @@ RSpec.configure do |config|
 end
 
 def create_jill_with_expense
-  let(:jill) { User.create!(username: 'jill_bruce', password: 'abcdef') }
+  let(:jill) { User.create!(username: 'jill_bruce', password: 'abcdef', admin:true) }
   let(:jill_expense) { jill.expenses.create!(amount: 30, description: 'expense description') }
 end
 
