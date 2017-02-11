@@ -25,9 +25,6 @@ export const logout = success => {
     datatype: 'json',
     url: '/api/session',
     type: 'DELETE',
-    success,
-    error: () => {
-      console.log("Logout error");
-    }
+    success
   });
 };
