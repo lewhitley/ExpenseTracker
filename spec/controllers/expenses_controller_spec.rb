@@ -77,4 +77,28 @@ RSpec.describe Api::ExpensesController, :type => :controller do
       end
     end
   end
+
+  describe "GET #index" do
+    before(:each) do
+      allow_message_expectations_on_nil
+    end
+
+    context "when no user logged in" do
+      it "returns an error" do
+        get :index, format: :json
+        expect(response.status).to eq(404)
+      end
+    end
+
+    context "when user logged in" do
+      before(:each) do
+        controller.login(user)
+      end
+
+      it "without admin or filter parameter returns an index of the user's expenses" do
+        get :index, format: :json
+        expect(json.all? {|id, obj| obj["user_id"] == user.id}).to be true
+      end
+    end
+  end
 end
