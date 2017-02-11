@@ -33,8 +33,8 @@ json.set! :weeks do
       json.set! :end_date, week_end
 
       start_i = i
-      week_end += 7
+      # week_end += 7
     end
-    week_end += 7 if week.empty?
+    week_end += 7 if expense.created_at >= week_end
   end
 end

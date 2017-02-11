@@ -1,4 +1,6 @@
 class Expense < ActiveRecord::Base
+  validates :amount, :description, :user, presence: true
+
   belongs_to :user
 
   def self.filter_by(user, params)
