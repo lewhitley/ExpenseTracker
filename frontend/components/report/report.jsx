@@ -40,14 +40,13 @@ class Report extends React.Component {
     );
   }
 
-  reportWeek(week) {
-    debugger;
+  reportWeek(week, idx) {
     return (
-      <div className='week-summary'>
+      <div className='week-summary' key={idx}>
         Week from { week.start_date } to { week.end_date }
         <ul className='report-expense-index'>
-          {reportArray(week.expenses).map( (expense, idx) => (
-            <Link to={'/expenses/'+expense.id} key={idx}>
+          {reportArray(week.expenses).map( (expense, j) => (
+            <Link to={'/expenses/'+expense.id} key={j}>
               <li className='expense-item'>
                 { expense.amount }
                 { expense.description }
@@ -70,7 +69,7 @@ class Report extends React.Component {
             Total spent: { this.props.report.total }
           </div>
           <br />
-          { this.props.report.weeks.map(week => this.reportWeek(week)) }
+          { this.props.report.weeks.map( (week, idx) => this.reportWeek(week, idx)) }
         </section>
       );
     }

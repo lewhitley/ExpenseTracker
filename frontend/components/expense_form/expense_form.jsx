@@ -17,6 +17,15 @@ class ExpenseForm extends React.Component {
     this.delete = this.delete.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      amount: nextProps.expense ? nextProps.expense.amount : "",
+      description: nextProps.expense ? nextProps.expense.description : "",
+      user_id: nextProps.currentUser.id,
+      id: nextProps.expense ? nextProps.expense.id : null
+    });
+  }
+
   update(field) {
     return e => this.setState({
       [field]: e.currentTarget.value

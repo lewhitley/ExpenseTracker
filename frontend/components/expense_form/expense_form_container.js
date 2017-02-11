@@ -4,7 +4,7 @@ import { createExpense, updateExpense, deleteExpense } from '../../actions/expen
 import ExpenseForm from './expense_form';
 
 const mapStateToProps = ( state, ownProps ) => {
-  if (ownProps.routeParams.expenseId) {
+  if (ownProps.routeParams.expenseId && state.expenses) {
     return ({
       expense: state.expenses[ownProps.routeParams.expenseId],
       currentUser: state.session.currentUser
