@@ -14,12 +14,12 @@ RSpec.describe Api::UsersController, :type => :controller do
   describe "POST #create" do
     context "with invalid params" do
       it "validates the presence of the user's username and password" do
-        post :create, user: {username: "jack_bruce", password: ""}
+        post :create, format: :json, user: {username: "jack_bruce", password: ""}
         expect(User.last).to be nil
       end
 
       it "validates that the password is at least 6 characters long" do
-        post :create, user: {username: "jack_bruce", password: "short"}
+        post :create, format: :json, user: {username: "jack_bruce", password: "short"}
         expect(User.last).to be nil
       end
     end
